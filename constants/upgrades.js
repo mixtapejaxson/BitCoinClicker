@@ -69,7 +69,7 @@ export const upgrades = [
                 description: 'Double your pickaxe efficiency',
                 multiplier: '2'
             }
-        ]
+        ],
         coinMultiplier: 1.03,
         costMultiplier: 1.115
     },
