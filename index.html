@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Bitcoin Clicker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/Assets/01.png">
+</head>
+<body>
+    <section> 
+        <div class="main">
+            <div class="left">
+                <p>Bitcoins: <br> <span class="coin-cost yellow-text">5000</span></p>
+                    <div class="coin-img-container">
+                        <img src="./Assets/01.png" alt="" class="coin-img" onclick="incrementalCoin(event)" draggable="false">
+                    </div>
+            </div>
+
+
+            <script id="upgrade-template" type="text/template">
+                <div class="upgrade" onclick="buyUpgrade('{{name}}')">
+                    <div class="left-section">
+                        <img src='{{image}}' alt="" class="upgrade-img"/>
+                    </div>
+                    <div class="middle-section">
+                        <h4>{{name}}</h4> 
+                    </div>
+                    <div class="cost-info">
+                        <p class="cost-text"><span class="{{name}}-cost">{{cost}}</span></p>
+                        <img src="./Assets/01.png" alt="" srcset="" class="coin-image"/>                  
+                    </div>
+                    <div class="right-section">Level <span class="{{name}}-level"></span></div>
+                    <div class="next-level-info">
+                        <p>
+                            +<span class="{{name}}-increase">{{increase}}</span> bitcoins<br>per click
+                        </p>
+
+                    </div>
+                </div>
+            </script>
+
+            <div class="right" id="upgrades-container">
+
+            </div>
+        </div> 
+
+        <div class="statistics">
+            <div class="texts">
+                <p>Bitcoin Per Click: <span id="btcpc-text" class="yellow-text">1</span></p>
+                <p>Bitcoin Per Second: <span id="btcps-text" class="yellow-text">0</span></p>
+            </div>
+        </div>
+
+        <div class="util-buttons">
+            <button class="util-button" onclick="save()">
+                Save
+            </button>
+            <button class="util-button" onclick="load()">
+                Load
+            </button>
+        </div>
+    </section>
+
+    <script type="module" src="index.js"></script>
+</body>
+</html>
