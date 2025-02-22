@@ -26,6 +26,23 @@ export const upgrades = [
         increase: document.querySelector('.clicker-increase'),
         parsedIncrease: parseFloat(document.querySelector('.clicker-increase').innerHTML),
         level: document.querySelector('.clicker-level'),
+        powerUps: [
+            {
+                name: '2x Clicker',
+                description: 'Double your clicking power',
+                multiplier: '2'
+            },
+            {
+                name: '3x Clicker',
+                description: 'Tripple your clicking power',
+                multiplier: '3'
+            },
+            {
+                name: '2x Clicker',
+                description: 'Double your clicking power',
+                multiplier: '2'
+            }
+        ],
         coinMultiplier: 1.025,
         costMultiplier: 1.12
     },
@@ -36,6 +53,23 @@ export const upgrades = [
         increase: document.querySelector('.pickaxe-increase'),
         parsedIncrease: parseFloat(document.querySelector('.pickaxe-increase').innerHTML),
         level: document.querySelector('.pickaxe-level'),
+        powerUps: [
+            {
+                name: '2x pickaxe',
+                description: 'Double your pickaxe efficiency',
+                multiplier: '2'
+            },
+            {
+                name: '3x pickaxe',
+                description: 'Tripple your pickaxe efficiency',
+                multiplier: '3'
+            },
+            {
+                name: '2x pickaxe',
+                description: 'Double your pickaxe efficiency',
+                multiplier: '2'
+            }
+        ]
         coinMultiplier: 1.03,
         costMultiplier: 1.115
     },
@@ -60,3 +94,5 @@ export const upgrades = [
         costMultiplier: 1.40
     }
 ]
+
+export const powerUpIntervals = [10, 20, 30, 50, 70, 100, 150, 200, 250, 300]

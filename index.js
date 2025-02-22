@@ -11,7 +11,14 @@ let coinImgContainer = document.querySelector('.coin-img-container')
 let btcpc = 1;
 let btcps = 0;
 
+const bgm = new Audio('./audio/bgm.mp3')
+bgm.volume = 0.15
+
 function incrementalCoin(event) {
+    
+    const clickingSound = new Audio('./audio/click.wav')
+    clickingSound.play();
+
     coin.innerHTML = Math.round(parsedCoin += btcpc);
 
     const x = event.offsetX
@@ -33,6 +40,9 @@ function buyUpgrade(upgrade) {
     })
 
     if (parsedCoin >= mu.parsedCost) {
+        const upgradeSound = new Audio('./audio/upgrade.mp3')
+        upgradeSound.volume = 0.25
+        upgradeSound.play()
         coin.innerHTML = Math.round(parsedCoin -= mu.parsedCost);
         
         mu.level.innerHTML ++
@@ -101,6 +111,7 @@ setInterval(() => {
     coin.innerHTML = Math.round(parsedCoin)
     btcpcText.innerHTML = Math.round(btcpc)
     btcpsText.innerHTML = Math.round(btcps);
+    bgm.play()
 }, 100);
 
 
