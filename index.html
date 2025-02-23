@@ -11,7 +11,7 @@
     <section> 
         <div class="main">
             <div class="left">
-                <p>Bitcoins: <br> <span class="coin-cost yellow-text">5000</span></p>
+                <p>Bitcoins: <br> <span class="coin-cost yellow-text">10000000</span></p>
                     <div class="coin-img-container">
                         <img src="./Assets/01.png" alt="" class="coin-img" onclick="incrementalCoin(event)" draggable="false">
                     </div>
@@ -19,7 +19,7 @@
 
 
             <script id="upgrade-template" type="text/template">
-                <div class="upgrade" onclick="buyUpgrade('{{name}}')">
+                <div class="upgrade" onclick="buyUpgrade('{{name}}')" id='{{name}}-upgrade'>
                     <div class="left-section">
                         <img src='{{image}}' alt="" class="upgrade-img"/>
                     </div>
@@ -31,8 +31,8 @@
                         <img src="./Assets/01.png" alt="" srcset="" class="coin-image"/>                  
                     </div>
                     <div class="right-section">Level <span class="{{name}}-level"></span></div>
-                    <div class="next-level-info">
-                        <p>
+                    <div class="next-level-info" id='{{name}}-next-level'>
+                        <p id='{{name}}-next-p'>
                             +<span class="{{name}}-increase">{{increase}}</span> bitcoins<br>per click
                         </p>
 

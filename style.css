@@ -95,9 +95,11 @@ body {
     right: -105px;
     background-color: rgb(90,89,90);
     width: 100px;
-    height: 80px;
+    height: 85px;
     text-align: center;
     display: none;
+    font-size: 15px;
+    border-radius: 3px;
 }
 
 .upgrade:hover .next-level-info {
