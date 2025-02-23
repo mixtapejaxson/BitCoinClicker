@@ -1,165 +1,199 @@
-import { powerUpIntervals, upgrades } from "./constants/upgrades.js";       //imports the upgrade.js file with the array and intervals
+import { powerUpIntervals, upgrades } from "./constants/upgrades.js";       
 
-let coin = document.querySelector('.coin-cost');         //grabs the coins out of HTML 
-let parsedCoin = parseFloat(coin.innerHTML);         // makes a float out of this coins
+let coin = document.querySelector('.coin-cost');         
+let parsedCoin = parseFloat(coin.innerHTML);         
 
-let btcpcText = document.getElementById('btcpc-text')       //grabs the btcpc out of HTML
-let btcpsText = document.getElementById('btcps-text')       //grabs the btcps out of HTML
+let btcpcText = document.getElementById('btcpc-text')       
+let btcpsText = document.getElementById('btcps-text')       
 
-let coinImgContainer = document.querySelector('.coin-img-container')        //grabs the container with the coin image inside
+let coinImgContainer = document.querySelector('.coin-img-container')        
 
-let btcpc = 1;      //btcpc = bitcoins per click
-let btcps = 0;       //btcps = bitcoins per second
+let btcpc = 1;      
+let btcps = 0;       
 
-const bgm = new Audio('./audio/bgm.mp3')        // makes a local variable for the audio file
-bgm.volume = 0.15       // changes the volume of the audio bgm (background music)
+let upgradesNavButton = document.getElementById('upgrades-nav-button')
+let skillsNavButton = document.getElementById('skills-nav-button')
 
-function incrementalCoin(event) {       // generates a function you can recall in HTML
+let artifactNavButton = document.getElementById('artifacts-nav-button')
+
+const bgm = new Audio('./audio/bgm.mp3')        
+bgm.volume = 0.15       
+
+function incrementalCoin(event) {       
     
-    const clickingSound = new Audio('./audio/click.wav')    // makes a local variable for the audio file
-            // The line above is in the function to make it play at the same time, if you click really fast  
+    const clickingSound = new Audio('./audio/click.wav')    
+            
 
-    clickingSound.play();        // plays this audio file once
+    clickingSound.play();        
 
-    coin.innerHTML = Math.round(parsedCoin += btcpc);       // adds the amount of btcpc to the total coin amount (parsed, 'cause it needs to be a number)
+    coin.innerHTML = Math.round(parsedCoin += btcpc);       
 
-    const x = event.offsetX         // gets the relative distance from the coin on the X - axis and names it x
-    const y = event.offsetY         // gets the relative distance from the coin on the Y - axis and names it Y
+    const x = event.offsetX         
+    const y = event.offsetY         
 
-    const div = document.createElement('div')       // creates a <div></div> in HTML
-    div.innerHTML = `+${Math.round(btcpc)}`         // places the number of btcpc into this div
+    const div = document.createElement('div')       
+    div.innerHTML = `+${Math.round(btcpc)}`         
     div.style.cssText = `color: white; position: absolute; top: ${y}px; left: ${x}px; font-size: 20px; pointer-events: none; `
-            // gives the text that pops up a good style, at the right posittion
-    coinImgContainer.appendChild(div)       // adds this div to the coin image container
+            
+    coinImgContainer.appendChild(div)       
 
-    div.classList.add('fade-up')         // adds the animation to this text that pops up
+    div.classList.add('fade-up')         
 
-    timeout(div)        // deletes the text after it is done with the animation
+    timeout(div)        
 }
 
-function buyUpgrade(upgrade) {      // generates a function you can recall in HTML
+function buyUpgrade(upgrade) {      
     const mu = upgrades.find((u) => {
-        if (u.name === upgrade) return u        // finds the same name as the upgrade and makes it mu.
+        if (u.name === upgrade) return u        
     })
 
-    const upgradeDiv = document.getElementById(`${mu.name}-upgrade`)        // this local variable is (name-of-the-upgrade)-upgrade
-    const nextLevelDiv = document.getElementById(`${mu.name}-next-level`)       // this local variable is (name-of-the-upgrade)-next-level
-    const nextLevelP = document.getElementById(`${mu.name}-next-p`)         // this local variable is (name-of-the-upgrade)-next-p, with p standing for paragraph <p></p>
+    const upgradeDiv = document.getElementById(`${mu.name}-upgrade`)        
+    const nextLevelDiv = document.getElementById(`${mu.name}-next-level`)       
+    const nextLevelP = document.getElementById(`${mu.name}-next-p`)         
     
-    if (parsedCoin >= mu.parsedCost) {      // if the total amount is higher than the cost of the upgrade
-        const upgradeSound = new Audio('./audio/upgrade.mp3')       // make a local varialble for this sound or mp3 file
-        upgradeSound.volume = 0.25          // set the volume to 25%, with 1 = 100%
-        upgradeSound.play()         // play the sound
+    if (parsedCoin >= mu.parsedCost) {      
+        const upgradeSound = new Audio('./audio/upgrade.mp3')       
+        upgradeSound.volume = 0.25          
+        upgradeSound.play()         
 
-        coin.innerHTML = Math.round(parsedCoin -= mu.parsedCost);       // substract the cost from the total coins
+        coin.innerHTML = Math.round(parsedCoin -= mu.parsedCost);       
 
-        let index = powerUpIntervals.indexOf(parseFloat(mu.level.innerHTML)) //this index is always one level behind, because it hasn't added 1 yet
+        let index = powerUpIntervals.indexOf(parseFloat(mu.level.innerHTML)) 
 
-        console.log('the first index is', index) // prints the index in console (1)
+        console.log('the first index is', index) 
 
-        if (index !== -1) { // -1 means that its not in the array 
-            upgradeDiv.style.cssText = `border-color: white`;       // change border color to white
-            nextLevelDiv.style.cssText = `background-color: #5a5959, font-weight: normal`;     // change the background color to the original color and the font-weight too
-            mu.cost.innerHTML = Math.round(mu.parsedCost *= mu.costMultiplier).toFixed(2)       // the cost of the next level of this upgrade gets updated
+        if (index !== -1) { 
+            upgradeDiv.style.cssText = `border-color: white`;       
+            nextLevelDiv.style.cssText = `background-color: #5a5959; font-weight: normal`;     
+            mu.cost.innerHTML = Math.round(mu.parsedCost *= mu.costMultiplier).toFixed(2)       
 
-            if (mu.name === 'clicker') {        // if the name of the upgrades is clicker
-                btcpc *= mu.powerUps[index].multiplier          // the btcpc gets multiplied with the multiplier
-                nextLevelP.innerHTML = `+${mu.parsedIncrease.toFixed(2)} bitcoins per click`          // the next level paragraph is 'amount' bitcoins per click
-            } else {            // if the name of the upgrade is not clicker 
-                btcps -= mu.power       // the btcps needs to get updated but without the other upgrades
-                mu.power *= mu.powerUps[index].multiplier       // mutliplying it wiht the multiplier 
-                btcps += mu.power               // the other upgrades get added backt to the btcps 
-                nextLevelP.innerHTML = `+${mu.parsedIncrease.toFixed(2)}} bitcoins per second`          // the next level paragraph is 'amount' bitcoins per second
+            if (mu.name === 'clicker') {        
+                btcpc *= mu.powerUps[index].multiplier          
+                nextLevelP.innerHTML = `+${mu.parsedIncrease.toFixed(2)} bitcoins per click`          
+            } else {            
+                btcps -= mu.power       
+                mu.power *= mu.powerUps[index].multiplier       
+                btcps += mu.power               
+                nextLevelP.innerHTML = `+${mu.parsedIncrease.toFixed(2)}} bitcoins per second`          
             }
 
         }
 
-        mu.level.innerHTML ++           // adds a level when you click on the upgrade 
+        mu.level.innerHTML ++           
 
-        index = powerUpIntervals.indexOf(parseFloat(mu.level.innerHTML))        // the index corresponds wiht the right level
+        index = powerUpIntervals.indexOf(parseFloat(mu.level.innerHTML))        
 
-        console.log('the index after upgradeing is', index)         //prints the index in console (2)
+        console.log('the index after upgradeing is', index)         
         
-        if (index !== -1) {  // if it is not -1
-            upgradeDiv.style.cssText = `border-color: orange`;      //  upgrade the border color to orange
-            nextLevelDiv.style.cssText = `background-color: #CC4500, font-weight: bold`;        // change the background color to the orange color and the font-weight to bold
-            nextLevelP.innerText = mu.powerUps[index].description          // edits the description
+        if (index !== -1) {  
+            upgradeDiv.style.cssText = `border-color: orange`;      
+            nextLevelDiv.style.cssText = `background-color: #CC4500; font-weight: bold`;        
+            nextLevelP.innerText = mu.powerUps[index].description          
 
             mu.cost.innerHTML = Math.round(mu.parsedCost * 2.5 * 1.004 ** parseFloat(mu.level.innerHTML).toFixed(2))        
-                    // upgrades the cost to 2.5 times more times 1.004 to the power of the level
+                    
 
-        } else {        // if it is -1 (normal upgrades)
-            mu.cost.innerHTML = Math.round(mu.parsedCost *= mu.costMultiplier)      // the cost gets updated by multipying it with the cost multiplier, out of upgrades.js
-            mu.parsedIncrease = parseFloat(mu.parsedIncrease * mu.coinMultiplier.toFixed(2));       // upgrades the increase of the upgrade
+        } else {        
+            mu.cost.innerHTML = Math.round(mu.parsedCost *= mu.costMultiplier)      
+            mu.parsedIncrease = parseFloat(mu.parsedIncrease * mu.coinMultiplier.toFixed(2));       
 
             if (mu.name === 'clicker') nextLevelP.innerHTML = `+${mu.parsedIncrease.toFixed(2)} bitcoins per click`    
-            // if the name of the upgrade is clicker, it changes the description with btcpc
+            
             else nextLevelP.innerHTML = `+${mu.parsedIncrease.toFixed(2)} bitcoins per second`           
-            // if the name of the upgrade is not clicker, it changes the description with btcps
+            
         }
 
-        if (mu.name === 'clicker') btcpc += mu.parsedIncrease       // if the name of the upgrade is clicker it changes the btcpc in statistics 
-        else {              // if the name of the upgrade is not clicker:
-            btcps  -= mu.power          // the btcps needs to get updated but without the other upgrades
-            mu.power += mu.parsedIncrease          // add the increase
-            btcps += mu.power           // add the power again (other upgrades)
+        if (mu.name === 'clicker') btcpc += mu.parsedIncrease       
+        else {              
+            btcps  -= mu.power          
+            mu.power += mu.parsedIncrease          
+            btcps += mu.power           
         }
     }
 }
 
 
-function save() {       // makes a function, save(), you can recall in HTML 
-    localStorage.clear()        // clears the localstorage
+function save() {       
+    localStorage.clear()        
     
-    upgrades.map((upgrade) => {     // loops through each upgrade in the upgrades array
-        const obj = JSON.stringify({    // creates a JSON string from the upgrade's level, cost, and increase
-            parsedLevel: parseFloat(upgrade.level.innerHTML),    // gets the current level of the upgrade
-            parsedCost: upgrade.parsedCost,    // gets the current cost of the upgrade
-            parsedIncrease: upgrade.parsedIncrease    // gets the current increase of the upgrade
+    upgrades.map((upgrade) => {     
+        const obj = JSON.stringify({    
+            parsedLevel: parseFloat(upgrade.level.innerHTML),    
+            parsedCost: upgrade.parsedCost,    
+            parsedIncrease: upgrade.parsedIncrease    
         })
-        console.log(upgrade.name, obj)    // logs the upgrade name and its JSON string to the console
+        console.log(upgrade.name, obj)    
 
-        localStorage.setItem(upgrade.name, obj)    // saves the JSON string to local storage with the upgrade name as the key
+        localStorage.setItem(upgrade.name, obj)    
     })
 
-    localStorage.setItem('btcpc', JSON.stringify(btcpc))    // saves the current btcpc to local storage
-    localStorage.setItem('btcps', JSON.stringify(btcps))    // saves the current btcps to local storage
-    localStorage.setItem('coin', JSON.stringify(parsedCoin))    // saves the current coin amount to local storage   
+    localStorage.setItem('btcpc', JSON.stringify(btcpc))    
+    localStorage.setItem('btcps', JSON.stringify(btcps))    
+    localStorage.setItem('coin', JSON.stringify(parsedCoin))    
 }
 
-function load() {    // makes a function, load(), you can recall in HTML 
-    upgrades.map((upgrade) => {    // loops through each upgrade in the upgrades array
-        const savedValues = JSON.parse(localStorage.getItem(upgrade.name))    // retrieves the saved values for the upgrade from local storage
+function load() {    
+    upgrades.map((upgrade) => {    
+        const savedValues = JSON.parse(localStorage.getItem(upgrade.name))    
 
-        upgrade.parsedCost = savedValues.parsedCost    // sets the upgrade's cost to the saved cost
-        upgrade.parsedIncrease = savedValues.parsedIncrease    // sets the upgrade's increase to the saved increase
+        upgrade.parsedCost = savedValues.parsedCost    
+        upgrade.parsedIncrease = savedValues.parsedIncrease    
 
-        upgrade.level.innerHTML = savedValues.parsedLevel    // sets the upgrade's level in the HTML to the saved level
-        upgrade.cost.innerHTML = Math.round(savedValues.parsedCost)    // sets the upgrade's cost in the HTML to the saved cost, rounded
-        upgrade.increase.innerHTML = savedValues.parsedIncrease    // sets the upgrade's increase in the HTML to the saved increase
+        upgrade.level.innerHTML = savedValues.parsedLevel    
+        upgrade.cost.innerHTML = Math.round(savedValues.parsedCost)    
+        upgrade.increase.innerHTML = savedValues.parsedIncrease    
     })
-    btcpc = JSON.parse(localStorage.getItem('btcpc'))    // retrieves the saved bitcoins per click (btcpc) from local storage
-    btcps = JSON.parse(localStorage.getItem('btcps'))    // retrieves the saved bitcoins per second (btcps) from local storage
-    parsedCoin = JSON.parse(localStorage.getItem('coin'))    // retrieves the saved coin amount from local storage
+    btcpc = JSON.parse(localStorage.getItem('btcpc'))    
+    btcps = JSON.parse(localStorage.getItem('btcps'))    
+    parsedCoin = JSON.parse(localStorage.getItem('coin'))    
 
-    coin.innerHTML = Math.round(parsedCoin)    // sets the coin amount in the HTML to the saved amount, rounded
+    coin.innerHTML = Math.round(parsedCoin)    
 }
 
-const timeout = (div) => {    // makes a function, timeout(), that removes a div after a delay
-    setTimeout(() => {    // sets a timeout to execute the following code after 800 milliseconds
-        div.remove()    // removes the div from the DOM
+const timeout = (div) => {    
+    setTimeout(() => {    
+        div.remove()    
     }, 800);
 }
 
-setInterval(() => {    // sets an interval to execute the following code every 100 milliseconds
-    parsedCoin += btcps / 10    // adds a fraction of the bitcoins per second (btcps) to the total coin amount
-    coin.innerHTML = Math.round(parsedCoin)    // updates the coin amount in the HTML, rounded
-    btcpcText.innerHTML = Math.round(btcpc)    // updates the bitcoins per click (btcpc) in the HTML, rounded
-    btcpsText.innerHTML = Math.round(btcps);    // updates the bitcoins per second (btcps) in the HTML, rounded
-    bgm.play()    // plays the background music
-}, 100);
+setInterval(() => {    
+    parsedCoin += btcps / 10    
+    coin.innerHTML = Math.round(parsedCoin)    
+    btcpcText.innerHTML = Math.round(btcpc)    
+    btcpsText.innerHTML = Math.round(btcps);    
+    bgm.play()    
+}, 100)
 
-window.incrementalCoin = incrementalCoin    // makes the incrementalCoin function available globally
-window.buyUpgrade = buyUpgrade    // makes the buyUpgrade function available globally
-window.save = save    // makes the save function available globally
-window.load = load    // makes the load function available globally
+skillsNavButton.addEventListener('click', function() {
+    const upgradesContainer = document.querySelectorAll('.upgrade')
+
+    upgradesContainer.forEach((container) => {
+        if (container.classList.contains('type-skill')) container.style.display = 'flex'
+        else container.style.display = "none" 
+    })
+})
+
+upgradesNavButton.addEventListener('click', function() {
+    const upgradesContainer = document.querySelectorAll('.upgrade')
+    upgradesContainer.forEach((container) => {
+        if (container.classList.contains('type-upgrade')) container.style.display = 'flex'
+        else container.style.display = 'none'
+    })
+})
+
+artifactNavButton.addEventListener('click', function() {
+    const upgradesContainer = document.querySelectorAll('.upgrade')
+    upgradesContainer.forEach((container) => {
+        if (container.classList.contains('type-artifact')) container.style.display = 'flex'
+        else container.style.display = 'none'
+    })
+})
+
+
+
+
+
+window.incrementalCoin = incrementalCoin    
+window.buyUpgrade = buyUpgrade    
+window.save = save    
+window.load = load    

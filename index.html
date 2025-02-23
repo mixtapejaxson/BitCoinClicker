@@ -11,7 +11,7 @@
     <section> 
         <div class="main">
             <div class="left">
-                <p>Bitcoins: <br> <span class="coin-cost yellow-text">10000000</span></p>
+                <p>Bitcoins: <br> <span class="coin-cost yellow-text">1000000000000</span></p>
                     <div class="coin-img-container">
                         <img src="./Assets/01.png" alt="" class="coin-img" onclick="incrementalCoin(event)" draggable="false">
                     </div>
@@ -19,7 +19,7 @@
 
 
             <script id="upgrade-template" type="text/template">
-                <div class="upgrade" onclick="buyUpgrade('{{name}}')" id='{{name}}-upgrade'>
+                <div class="upgrade type-{{type}}" onclick="buyUpgrade('{{name}}')" id='{{name}}-upgrade'>
                     <div class="left-section">
                         <img src='{{image}}' alt="" class="upgrade-img"/>
                     </div>
@@ -33,15 +33,24 @@
                     <div class="right-section">Level <span class="{{name}}-level"></span></div>
                     <div class="next-level-info" id='{{name}}-next-level'>
                         <p id='{{name}}-next-p'>
-                            +<span class="{{name}}-increase">{{increase}}</span> bitcoins<br>per click
+                            +<span class="{{name}}-increase">{{increase}}</span> bitcoins <br />per click
                         </p>
 
                     </div>
                 </div>
             </script>
 
-            <div class="right" id="upgrades-container">
+            <div class="right">
 
+                <div class="right-nav-bar">
+                    <div id="upgrades-nav-button">Upgrade</div>
+                    <div id="skills-nav-button">Skills</div>
+                    <div id="artifacts-nav-button">Artifacts</div>
+                </div>
+
+                <div id="upgrades-container">
+
+                </div>
             </div>
         </div> 
 
@@ -63,5 +72,7 @@
     </section>
 
     <script type="module" src="index.js"></script>
+    <script type="module" src="constants/skills.js"></script>
+    <script type="module" src="constants/artifacts.js"></script>
 </body>
 </html>

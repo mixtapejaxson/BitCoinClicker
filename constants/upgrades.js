@@ -1,10 +1,10 @@
 
-import { defaultValues } from "./defaultValues.js";
+import { defaultUpgradeValues } from "./defaultValues.js";
 function createUpgrades() {
     const upgradesContainer = document.getElementById('upgrades-container')
     const template = document.getElementById('upgrade-template').textContent
 
-    defaultValues.forEach(obj => {
+    defaultUpgradeValues.forEach(obj => {
         let html = template;
 
         Object.keys(obj).forEach((key => {
@@ -29,18 +29,53 @@ export const upgrades = [
         powerUps: [
             {
                 name: '2x clicker',
-                description: 'Double your clicking power',
+                description: 'Double your clicker power',
                 multiplier: 2,
             },
             {
                 name: '3x clicker',
-                description: 'Triple your clicking power',
+                description: 'Triple your clicker power',
                 multiplier: 3,
             },
             {
                 name: '2x clicker',
-                description: 'Double your clicking power',
+                description: 'Double your clicker power',
                 multiplier: 2,
+            },
+            {
+                name: '3x clicker',
+                description: 'Double your clicker power',
+                multiplier: 2,
+            },
+            {
+                name: '2x clicker',
+                description: 'Triple your clicker power',
+                multiplier: 3,
+            },
+            {
+                name: '3x clicker',
+                description: 'Double your clicker power',
+                multiplier: 2,
+            },
+            {
+                name: '2x clicker',
+                description: 'Double your clicker power',
+                multiplier: 2,
+            },
+            {
+                name: '3x clicker',
+                description: 'Triple your clicker power',
+                multiplier: 3,
+            },
+            {
+                name: '2x clicker',
+                description: 'Double your clicker power',
+                multiplier: 2,
+            },
+            {
+                name: '3x clicker',
+                description: 'Triple your clicker power',
+                multiplier: 3,
             },
         ],
         power: 0,
@@ -70,6 +105,41 @@ export const upgrades = [
                 description: 'Double your pickaxe efficiency',
                 multiplier: 2,
             },
+            {
+                name: '3x pickaxe',
+                description: 'Double your pickaxe efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '2x pickaxe',
+                description: 'Triple your pickaxe efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '3x pickaxe',
+                description: 'Double your pickaxe efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '2x pickaxe',
+                description: 'Double your pickaxe efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x pickaxe',
+                description: 'Triple your pickaxe efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '2x pickaxe',
+                description: 'Double your pickaxe efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x pickaxe',
+                description: 'Triple your pickaxe efficiency',
+                multiplier: 3,
+            },
         ],
         power: 0,
         coinMultiplier: 1.03,
@@ -83,6 +153,58 @@ export const upgrades = [
         parsedIncrease: parseFloat(document.querySelector('.miner-increase').innerHTML),
         level: document.querySelector('.miner-level'),
         power: 0,
+        powerUps: [
+            {
+                name: '2x miner',
+                description: 'Double your miner efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x miner',
+                description: 'Triple your miner efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '2x miner',
+                description: 'Double your miner efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x miner',
+                description: 'Double your miner efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '2x miner',
+                description: 'Triple your miner efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '3x miner',
+                description: 'Double your miner efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '2x miner',
+                description: 'Double your miner efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x miner',
+                description: 'Triple your miner efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '2x miner',
+                description: 'Double your miner efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x miner',
+                description: 'Triple your miner efficiency',
+                multiplier: 3,
+            },
+        ],
         coinMultiplier: 1.035,
         costMultiplier: 1.11
     },
@@ -94,6 +216,58 @@ export const upgrades = [
         parsedIncrease: parseFloat(document.querySelector('.factory-increase').innerHTML),
         level: document.querySelector('.factory-level'),
         power: 0,
+        powerUps: [
+            {
+                name: '2x factory',
+                description: 'Double your factory efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x factory',
+                description: 'Triple your factory efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '2x factory',
+                description: 'Double your factory efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x factory',
+                description: 'Double your factory efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '2x factory',
+                description: 'Triple your factory efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '3x factory',
+                description: 'Double your factory efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '2x factory',
+                description: 'Double your factory efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x factory',
+                description: 'Triple your factory efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '2x factory',
+                description: 'Double your factory efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x factory',
+                description: 'Triple your factory efficiency',
+                multiplier: 3,
+            },
+        ],
         coinMultiplier: 1.04,
         costMultiplier: 1.40
     },
@@ -106,6 +280,58 @@ export const upgrades = [
         parsedIncrease: parseFloat(document.querySelector('.potion-increase').innerHTML),
         level: document.querySelector('.potion-level'),
         power: 0,
+        powerUps: [
+            {
+                name: '2x potion',
+                description: 'Double your potion efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x potion',
+                description: 'Triple your potion efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '2x potion',
+                description: 'Double your potion efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x potion',
+                description: 'Double your potion efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '2x potion',
+                description: 'Triple your potion efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '3x potion',
+                description: 'Double your potion efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '2x potion',
+                description: 'Double your potion efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x potion',
+                description: 'Triple your potion efficiency',
+                multiplier: 3,
+            },
+            {
+                name: '2x potion',
+                description: 'Double your potion efficiency',
+                multiplier: 2,
+            },
+            {
+                name: '3x potion',
+                description: 'Triple your potion efficiency',
+                multiplier: 3,
+            },
+        ],
         coinMultiplier: 1.045,
         costMultiplier: 1.96
     },

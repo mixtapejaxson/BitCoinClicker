@@ -18,6 +18,7 @@ body {
 .main {
     display: flex;
     gap: 200px;
+    margin-bottom: 100px;
 }
 
 .left {
@@ -26,11 +27,41 @@ body {
     margin-bottom: 50px;
 }
 
-.right {
+.right-nav-bar {
+    display: flex;
+    font-weight: bold;
+}
+
+.right-nav-bar>div {
+    width: 140px;
+    height: 40px;
+    background-color: rgb(95, 0, 107);
+    text-align: center;
+    padding-top: 15px;
+}
+
+.right-nav-bar>div:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.right-nav-bar>:first-child {
+    background: rgb(0, 0, 107);
+}
+
+.right-nav-bar>:nth-child(2) {
+    background: rgb(107, 0, 0);
+}
+
+#upgrades-container {
     max-height: 400px;
-    width: 550px;
-    padding: 20px 5px;
+    width: 500px;
+    padding: 20px;
     overflow-y: scroll;
+    border: 2px rgb(150, 150, 150) solid;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgb(140, 140, 140);
+    position: relative;
 }
 
 .yellow-text {
@@ -78,6 +109,14 @@ body {
     position: relative;
     cursor: pointer;
     margin-bottom: 15px;
+}
+
+.type-skill {
+    display: none;
+}
+
+.type-artifact {
+    display: none;
 }
 
 .coin-image {
