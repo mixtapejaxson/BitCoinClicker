@@ -150,10 +150,19 @@ function load() {
     coin.innerHTML = Math.round(parsedCoin)    
 }
 
-const timeout = (div) => {    
-    setTimeout(() => {    
-        div.remove()    
-    }, 800);
+
+function prestige() {
+    upgrades.map((upgrade) => {
+        const mu = defaultUpgradeValues.find((u) => {if(upgrade.name === u.name) return u})
+            
+        upgrade.parsedCost = mu.cost    
+        upgrade.parsedIncrease = mu.increase    
+
+        upgrade.level.innerHTML = mu.level    
+        upgrade.cost.innerHTML = mu.cost
+        upgrade.increase.innerHTML = mu.increase  
+
+    })
 }
 
 setInterval(() => {    
