@@ -19,8 +19,10 @@ let btcps = 0;
 let cooldownActiveStrongerClicks = false;
 let cooldownActiveLuckyDay = false;
 
-let cooldownStrongerClicks = 600000;
+let cooldownStrongerClicks = 6000;
 let cooldownLuckyDay = 1000000;
+
+let stopTimeStrongerclicks = 30000;
 
 let upgradesNavButton = document.getElementById('upgrades-nav-button')
 let skillsNavButton = document.getElementById('skills-nav-button')
@@ -160,13 +162,23 @@ function buySkill(skillName) {
 
                 setTimeout(() => {
                     btcpc = originalBtcpc;
-                    console.log('btcpc is back to normal & cooldown = false');
+                    console.log('btcpc is back to normal')
+
+                    nextLevelSkillDiv.style.cssText = `background-color:rgb(217, 231, 15); font-weight: bold`;
+                    skillDiv.style.borderColor = 'yellow';
+
+                }, stopTimeStrongerclicks);
+
+                setTimeout(() => {
+                    console.log('cooldown = false');
                     cooldownActiveStrongerClicks = false;
+                    alert('You can use Stronger Clicks again!');
 
                     nextLevelSkillDiv.style.cssText = `background-color: #5a5959; font-weight: normal`;
                     skillDiv.style.borderColor = 'white';
                     cooldownStrongerClicks = originalCooldownStrongerClicks;
                 }, originalCooldownStrongerClicks);
+
             } else {
                 alert('The cooldown is still active for Stronger Clicks! ' + '(' + (cooldownStrongerClicks / 1000).toFixed(0) + ' seconds remaining)');
             }
@@ -195,6 +207,7 @@ function buySkill(skillName) {
                 setTimeout(() => {
                     console.log('cooldown = false');
                     cooldownActiveLuckyDay = false;
+                    alert('You can use Lucky Day again!');
                     nextLevelSkillDiv.style.cssText = `background-color: #5a5959; font-weight: normal`;
                     skillDiv.style.borderColor = 'white';
                     cooldownLuckyDay = originalCooldownLuckyDay;
