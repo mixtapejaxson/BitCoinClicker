@@ -19,7 +19,7 @@ let btcps = 0;
 let cooldownActiveStrongerClicks = false;
 let cooldownActiveLuckyDay = false;
 
-let cooldownStrongerClicks = 6000;
+let cooldownStrongerClicks = 600000;
 let cooldownLuckyDay = 1000000;
 
 let stopTimeStrongerclicks = 30000;
