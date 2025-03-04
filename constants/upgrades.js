@@ -1,4 +1,3 @@
-
 import { defaultUpgradeValues } from "./defaultValues.js";
 function createUpgrades() {
     const upgradesContainer = document.getElementById('upgrades-container')
@@ -336,5 +335,6 @@ export const upgrades = [
         costMultiplier: 1.96
     },
 ]
+
 
 export const powerUpIntervals = [10, 20, 30, 50, 70, 100, 150, 200, 250, 300]

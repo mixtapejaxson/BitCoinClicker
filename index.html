@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <title>Bitcoin Clicker</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/Assets/01.png">
+    <link rel="icon" href="./Assets/01.png">
 </head>
 <body>
     <section> 
         <div class="main">
             <div class="left">
-                <p>Bitcoins: <br> <span class="coin-cost yellow-text">0</span></p>
+                <p>Bitcoins: <br> <span class="coin-cost yellow-text">150000000</span></p>
                     <div class="coin-img-container">
                         <img src="./Assets/01.png" alt="" class="coin-img" onclick="incrementalCoin(event)" draggable="false">
                     </div>
@@ -19,7 +19,7 @@
 
 
             <script id="upgrade-template" type="text/template">
-                <div class="upgrade type-{{type}}" onclick="buyUpgrade('{{name}}')" id='{{name}}-upgrade'>
+                <div class="upgrade type-{{type}}" onclick="handleBuy('{{type}}', '{{name}}')" id='{{name}}-{{type}}'>
                     <div class="left-section">
                         <img src='{{image}}' alt="" class="upgrade-img"/>
                     </div>
@@ -30,13 +30,12 @@
                         <p class="cost-text"><span class="{{name}}-cost">{{cost}}</span></p>
                         <img src="./Assets/01.png" alt="" srcset="" class="coin-image"/>                  
                     </div>
-                    <div class="right-section">Level <span class="{{name}}-level"></span></div>
+                    <div class="right-section level-section">Level <span class="{{name}}-level">0</span></div>
                     <div class="next-level-info" id='{{name}}-next-level'>
                         <p id='{{name}}-next-p'>
-                            +<span class="{{name}}-increase">{{increase}}</span> bitcoins <br />per click
+                            <span class="{{name}}-increase">{{plusornot}}{{increase}} {{description}}</span> 
                         </p>
-
-                    </div>
+                    </div> 
                 </div>
             </script>
 
@@ -62,17 +61,21 @@
         </div>
 
         <div class="util-buttons">
-            <button class="util-button" onclick="save()">
-                Save
-            </button>
-            <button class="util-button" onclick="load()">
-                Load
-            </button>
+            <button class="util-button" onclick="save()">Save</button>
+            <button class="util-button" onclick="load()">Load</button>
+            <button class="util-button prestige-button" onclick="prestige()">Prestige</button>
         </div>
+
+        <div class="relic">
+            Relic: <span id="relic">0</span>
+        </div>
+
     </section>
 
     <script type="module" src="index.js"></script>
+    <script type="module" src="constants/upgrades.js"></script>
     <script type="module" src="constants/skills.js"></script>
     <script type="module" src="constants/artifacts.js"></script>
+</body>
 </body>
 </html>

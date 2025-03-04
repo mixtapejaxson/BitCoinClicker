@@ -89,20 +89,12 @@ body {
     transform: scale(1.03);
 }
 
-.upgrade-img {
-    width: 35px;
-}
-
-.coin-img-container {
-    position: relative;
-}
-
 .upgrade {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 330px;
-    height: 60px;
+    height: 80px;
     border: 4px solid white;
     padding: 10px 20px;
     border-radius: 10px;
@@ -111,12 +103,25 @@ body {
     margin-bottom: 15px;
 }
 
+.upgrade:hover {
+    opacity: 0.85;
+    cursor: pointer;
+}
+
 .type-skill {
     display: none;
 }
 
 .type-artifact {
     display: none;
+}
+
+.upgrade-img {
+    width: 40px;
+}
+
+.coin-img-container {
+    position: relative;
 }
 
 .coin-image {
@@ -134,11 +139,15 @@ body {
     right: -105px;
     background-color: rgb(90,89,90);
     width: 100px;
-    height: 85px;
+    height: 105px;
     text-align: center;
     display: none;
-    font-size: 15px;
+    font-size: 14px;
     border-radius: 3px;
+}
+
+.right-section {
+    display: block;
 }
 
 .upgrade:hover .next-level-info {
@@ -184,6 +193,15 @@ body {
 .util-button:hover {
     opacity: 0.8;
     cursor: pointer;
+}
+
+.relic {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .fade-up {
