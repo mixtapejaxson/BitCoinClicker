@@ -26,15 +26,14 @@ function createArtifacts() {
   });
 
   upgradesContainer.appendChild(fragment);
+
+defaultArtifactValues.forEach((artifact) => {
+    console.log(`Querying for artifact: ${artifact.name}`);
+    artifact.cost = document.querySelector(`${artifact.name}-cost`);
+    artifact.parsedCost = parseFloat(artifact.parsedCost);
+    artifact.level = document.querySelector(`${artifact.name}-level`);
+    console.log(`Artifact: ${artifact.name}, Cost: ${artifact.parsedCost}, Level: ${artifact.level}`);
+  });
 }
 
 createArtifacts();
-
-export const artifacts = defaultArtifactValues.map(artifact => ({
-    ...artifact,
-    cost: document.querySelector(`.${artifact.name}-cost`),
-    parsedCost: parseFloat(document.querySelector(`.${artifact.name}-cost`).innerHTML),
-    increase: document.querySelector(`.${artifact.name}-increase`),
-    parsedIncrease: parseFloat(document.querySelector(`.${artifact.name}-increase`).innerHTML),
-    level: document.querySelector(`.${artifact.name}-level`),
-}));

@@ -11,7 +11,7 @@
     <section> 
         <div class="main">
             <div class="left">
-                <p>Bitcoins: <br> <span class="coin-cost yellow-text">0</span></p>
+                <p>Bitcoins: <br> <span class="coin-cost yellow-text">150000000</span></p>
                     <div class="coin-img-container">
                         <img src="./Assets/01.png" alt="" class="coin-img" onclick="incrementalCoin(event)" draggable="false">
                     </div>
@@ -27,8 +27,9 @@
                         <h4>{{name}}</h4> 
                     </div>
                     <div class="cost-info">
-                        <p class="cost-text"><span class="{{name}}-cost">{{cost}}</span></p>
-                        <img src="./Assets/01.png" alt="" srcset="" class="coin-image"/>                  
+                        <p class="cost-text"><span class="{{name}}-cost">{{cost}}{{costRelic}}</span></p>
+                        <img src="./Assets/01.png" alt="" srcset="" class="coin-image"/>
+                        <img src="./Assets/relic.png" alt="" class="relic-image"/>                  
                     </div>
                     <div class="right-section level-section">Level <span class="{{name}}-level">0</span></div>
                     <div class="next-level-info" id='{{name}}-next-level'>
@@ -40,15 +41,13 @@
             </script>
 
             <div class="right">
-
-                <div class="right-nav-bar">
+               <div class="right-nav-bar">
                     <div id="upgrades-nav-button">Upgrade</div>
                     <div id="skills-nav-button">Skills</div>
                     <div id="artifacts-nav-button">Artifacts</div>
                 </div>
 
                 <div id="upgrades-container">
-
                 </div>
             </div>
         </div> 
@@ -57,6 +56,9 @@
             <div class="texts">
                 <p>Bitcoin Per Click: <span id="btcpc-text" class="yellow-text">1</span></p>
                 <p>Bitcoin Per Second: <span id="btcps-text" class="yellow-text">0</span></p>
+                <div class="timer">
+                    <p>Time Left: <span id="timeleft" class="red-text">n/a</span></p>
+                </div>
             </div>
         </div>
 
@@ -66,6 +68,9 @@
             <button class="util-button prestige-button" onclick="prestige()">Prestige</button>
         </div>
 
+
+        <div class="relic-display">
+        </div>
         <div class="relic">
             Relic: <span id="relic">0</span>
         </div>
@@ -78,4 +83,4 @@
     <script type="module" src="constants/artifacts.js"></script>
 </body>
 </body>
-</html>
+</html> 

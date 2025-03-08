@@ -29,7 +29,8 @@ let skillsNavButton = document.getElementById('skills-nav-button')
 let artifactNavButton = document.getElementById('artifacts-nav-button')
 
 let relic = document.getElementById('relic')
-let parsedRelic = parseFloat(relic.innerHTML)
+
+let timeleft = document.getElementById('timeleft')
 
 const bgm = new Audio('./audio/bgm.mp3')        
 bgm.volume = 0.15       
@@ -136,6 +137,15 @@ function buySkill(skillName) {
     const skillDiv = document.getElementById(`${skillData.name}-skill`);
     const nextLevelSkillDiv = document.getElementById(`${skillData.name}-next-level`);
 
+
+    if (cooldownActiveStrongerClicks === true) {
+        skillDiv.style.borderColor = 'rgb(217, 231, 15)';
+    }
+
+    if (cooldownActiveLuckyDay === true) {
+        skillDiv.style.borderColor = 'rgb(217, 231, 15)';
+    }
+
     if (parsedCoin >= skillData.parsedCost) {
         if (skillData.name === 'stronger clicks') {
             if (!cooldownActiveStrongerClicks) {
@@ -158,7 +168,24 @@ function buySkill(skillName) {
 
                 alert('Stronger Clicks is active for 30 seconds!');
 
-                setInterval(() => { cooldownStrongerClicks -= 1000; }, 1000);
+                let originalStopTimeStrongerClicks = stopTimeStrongerclicks;
+
+                let intervalStrongerClicks = setInterval(() => { 
+                    stopTimeStrongerclicks -= 1000;
+                    timeleft.innerHTML = (stopTimeStrongerclicks / 1000).toFixed(0);
+                    }, 1000);
+                
+                setInterval(() => { 
+                    cooldownStrongerClicks -= 1000;
+                    }, 1000);
+
+
+
+                setTimeout(() => {
+                    stopTimeStrongerclicks = originalStopTimeStrongerClicks;
+                    timeleft.innerHTML = 'n/a';
+                    clearInterval(intervalStrongerClicks);
+                }, originalStopTimeStrongerClicks);
 
                 setTimeout(() => {
                     btcpc = originalBtcpc;
@@ -184,8 +211,8 @@ function buySkill(skillName) {
             }
         } else if (skillData.name === 'lucky-day') {
             if (!cooldownActiveLuckyDay) { 
-                parsedCoin += btcps * 600;
-                coin.innerHTML = Math.round(parsedCoin).toFixed(2);
+                parsedCoin += btcps * 300;
+                coin.innerHTML = Math.round(parsedCoin -= skillData.parsedCost);
 
                 let originalCooldownLuckyDay = cooldownLuckyDay;
 
@@ -221,11 +248,20 @@ function buySkill(skillName) {
     }
 }
 
-
-
 function buyArtifact(artifactName) {
-    
-}
+    const artifactData = defaultArtifactValues.find((a) => a.name === artifactName);
+    if (artifactData.name === 'double-bitcoins') {
+        if (relic.innerHTML >= artifactData.costRelic) {
+            relic.innerHTML -= artifactData.costRelic;
+            parsedCoin *= 2;
+            coin.innerHTML = Math.round(parsedCoin).toFixed(2);
+    } else {
+        console.error('You need more relics to buy this artifact!');
+    }
+
+} else {
+    console.error('Unknown artifact:', artifactName);
+}}
 
 
 
@@ -239,14 +275,28 @@ function save() {
             parsedCost: upgrade.parsedCost,    
             parsedIncrease: upgrade.parsedIncrease    
         })
-        console.log(upgrade.name, obj)    
-
+        console.log(upgrade.name, obj)
         localStorage.setItem(upgrade.name, obj)    
     })
 
+
+    console.log('relic innerHTML', JSON.stringify(relic.innerHTML))
+    console.log('cooldownStrongerClicks', JSON.stringify(cooldownStrongerClicks))
+    console.log('cooldownActiveStrongerClicks', JSON.stringify(cooldownActiveStrongerClicks))
+    console.log('cooldownLuckyDay', JSON.stringify(cooldownLuckyDay))
+    console.log('cooldownActiveLuckyDay', JSON.stringify(cooldownActiveLuckyDay))
+    console.log('btcpc', JSON.stringify(btcpc))
+    console.log('btcps', JSON.stringify(btcps))
+    console.log('coin', JSON.stringify(parsedCoin))
+
     localStorage.setItem('btcpc', JSON.stringify(btcpc))    
     localStorage.setItem('btcps', JSON.stringify(btcps))    
-    localStorage.setItem('coin', JSON.stringify(parsedCoin))    
+    localStorage.setItem('coin', JSON.stringify(parsedCoin)) 
+    localStorage.setItem('relic innerHTML', JSON.stringify(relic.innerHTML))
+    localStorage.setItem('cooldownStrongerClicks', JSON.stringify(cooldownStrongerClicks))   
+    localStorage.setItem('cooldownActiveStrongerClicks', JSON.stringify(cooldownActiveStrongerClicks))
+    localStorage.setItem('cooldownLuckyDay', JSON.stringify(cooldownLuckyDay))
+    localStorage.setItem('cooldownActiveLuckyDay', JSON.stringify(cooldownActiveLuckyDay))
 }
 
 function load() {    
@@ -263,7 +313,11 @@ function load() {
     btcpc = JSON.parse(localStorage.getItem('btcpc'))    
     btcps = JSON.parse(localStorage.getItem('btcps'))    
     parsedCoin = JSON.parse(localStorage.getItem('coin'))    
-
+    relic.innerHTML = JSON.parse(localStorage.getItem('relic innerHTML'))
+    cooldownStrongerClicks = JSON.parse(localStorage.getItem('cooldownStrongerClicks'))
+    cooldownActiveStrongerClicks = JSON.parse(localStorage.getItem('cooldownActiveStrongerClicks'))
+    cooldownLuckyDay = JSON.parse(localStorage.getItem('cooldownLuckyDay'))
+    cooldownActiveLuckyDay = JSON.parse(localStorage.getItem('cooldownActiveLuckyDay'))
     coin.innerHTML = Math.round(parsedCoin)    
 }
 
@@ -357,28 +411,61 @@ artifactNavButton.addEventListener('click', function() {
 
 document.getElementById('skills-nav-button').addEventListener('click', function() {
     const levelSections = document.querySelectorAll('.right-section');
-
+    const relicImage = document.querySelectorAll('.relic-image');
+    const coinImage = document.querySelectorAll('.coin-image');
 
     levelSections.forEach(section => {
         section.style.display = 'none';
     });
+
+    relicImage.forEach(image => {
+        image.style.display = 'none';
+    });
+
+    coinImage.forEach(image => {
+        image.style.display = 'flex';
+    });
 });
 
+
 document.getElementById('upgrades-nav-button').addEventListener('click', function() {
-    const levelSections = document.querySelectorAll('.right-section'); 
+    const levelSections = document.querySelectorAll('.right-section');
+    const relicImage = document.querySelectorAll('.relic-image');
+    const coinImage = document.querySelectorAll('.coin-image');
 
     levelSections.forEach(section => {
-        section.style.display = 'block'; 
+        section.style.display = 'block';
+    });
+
+    relicImage.forEach(image => {
+        image.style.display = 'none';
+    });
+
+    coinImage.forEach(image => {
+        image.style.display = 'flex';
     });
 });
 
 document.getElementById('artifacts-nav-button').addEventListener('click', function() {
-    const levelSections = document.querySelectorAll('.right-section'); 
+    const levelSections = document.querySelectorAll('.right-section');
+    const relicImage = document.querySelectorAll('.relic-image');
+    const coinImage = document.querySelectorAll('.coin-image');
 
     levelSections.forEach(section => {
-        section.style.display = 'block'; 
+        section.style.display = 'block';
+    });
+
+    relicImage.forEach(image => {
+        image.style.display = 'flex';
+    });
+
+    coinImage.forEach(image => {
+        image.style.display = 'none';
     });
 });
+
+
+
 
 
 

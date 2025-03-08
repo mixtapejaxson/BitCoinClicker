@@ -70,6 +70,14 @@ body {
     font-weight: 1000;
     text-shadow: 2px 2px 3px rgb(90,90,90);
 }
+
+.red-text {
+    font-size: 32px;
+    color: rgb(255, 0, 0);
+    font-weight: 1000;
+    text-shadow: 2px 2px 3px rgb(90,90,90);
+}
+
 .cost-text {
     font-size: 18px;
 }
@@ -129,6 +137,12 @@ body {
     width: 25px;
 }
 
+.relic-image {
+    height: 30px;
+    width: 30px;
+    display: none;
+}
+
 .cost-info {
     display: flex;
     align-items: center;
@@ -157,7 +171,7 @@ body {
 .statistics {
     position: absolute;
     bottom: 0;
-    width: 450px;
+    width: 750px;
     padding: 30px;
     border: 2px white solid;
     border-top-left-radius: 10px;
@@ -168,7 +182,7 @@ body {
 
 .texts {
     display: flex;
-    gap: 100px;
+    gap: 50px;
     justify-content: center;
     font-weight: bold;
     font-size: 22px;
@@ -202,6 +216,15 @@ body {
     transform: translateX(-50%);
     font-size: 20px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.relic-img {
+    width: 30px;
+    height: 30px;
+    display: flex;
 }
 
 .fade-up {
